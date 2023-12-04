@@ -12,7 +12,7 @@ The process of preparing digitized slide images for machine learning operations 
 
 The list of slides can either be in the form of a Pandas dataframe (eg from a sample csv file) or from a directory containing slide images. If using a directory path, the images cannot be contained within subfolders and must have one of the following extensions: .tif, .tiff, .svg, .ndpi
 
-```
+```python
 from slide_prepper.preprocess.pth_writer import SlideLevelPthWriter
 
 # If using a sample sheet:
