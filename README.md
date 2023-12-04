@@ -13,7 +13,7 @@ The process of preparing digitized slide images for machine learning operations 
 The list of slides can either be in the form of a Pandas dataframe (eg from a sample csv file) or from a directory containing slide images. If using a directory path, the images cannot be contained within subfolders and must have one of the following extensions: .tif, .tiff, .svg, .ndpi
 
 ```python
-from slide_prepper.preprocess.pth_writer import SlideLevelPthWriter
+from slide_prepper.pth_writer import SlideLevelPthWriter
 
 # If using a sample sheet:
 wsi_df = pd.read_csv(SLIDE_CSV)
@@ -30,7 +30,7 @@ pt_writer.write_file("data_file.pth")
 It is a good idea to check the data file to ensure it has been written as desired. The SlideLevelPthReader class enables easy printing of slide information when provided a slide index. The slide index is the position the slide is in the original slide dataframe or directory. 
 
 ```python
-from slide_prepper.preprocess.pth_reader import SlideLevelPthReader
+from slide_prepper.pth_reader import SlideLevelPthReader
 
 pt_reader = SlideLevelPthReader("data_file.pth")
 print(pt_reader.pull_slide_info(slide_idx=2))
@@ -41,7 +41,7 @@ print(pt_reader.pull_slide_info(slide_idx=2))
 For each slide, a mask of tissue areas is created, which is used in determining tile coordinates during downstream data preparation. These masks are scaled down, ideally to 1/64th the size of the original slide image, but less downscaling is performed if level is not available. 
 
 ```python
-from slide_prepper.preprocess.masker import Masker
+from slide_prepper.masker import Masker
 
 # HSV thresholding
 masker = Masker(wsi_dir=WSI_DIR, 
@@ -65,7 +65,7 @@ masker.run()
 Now that masks are available, tile coordinates can be appended to the PyTorch data file. Note that if the masks are not available or the path to the mask directory is incorrect, all tiles in the image will be saved. However, there will be a warning printed for any slides that do not have a mask file available. 
 
 ```python
-from slide_prepper.preprocess.coord_generator import CoordGenerator
+from slide_prepper.coord_generator import CoordGenerator
 
 coord_maker = CoordGenerator(pt_file="data_file.pth", 
                              mask_dir=MASK_DIR, 
@@ -81,7 +81,7 @@ print(pt_reader.pull_slide_info(slide_idx=2)['tile_coords'][0:10])
 Creates a data sheet defining which slides are in training, validation, and test sets in each fold. This can be updated manually and used in downstream training. 
 
 ```python
-from slide_prepper.preprocess.split_folds import DataSplitter
+from slide_prepper.split_folds import DataSplitter
 
 splitter = DataSplitter("data_file.pth", n_folds=1)
 splitter.run()
