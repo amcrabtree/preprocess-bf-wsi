@@ -29,7 +29,7 @@ pt_writer.write_file("data_file.pth")
 
 It is a good idea to check the data file to ensure it has been written as desired. The SlideLevelPthReader class enables easy printing of slide information when provided a slide index. The slide index is the position the slide is in the original slide dataframe or directory. 
 
-```
+```python
 from slide_prepper.preprocess.pth_reader import SlideLevelPthReader
 
 pt_reader = SlideLevelPthReader("data_file.pth")
@@ -40,7 +40,7 @@ print(pt_reader.pull_slide_info(slide_idx=2))
 
 For each slide, a mask of tissue areas is created, which is used in determining tile coordinates during downstream data preparation. These masks are scaled down, ideally to 1/64th the size of the original slide image, but less downscaling is performed if level is not available. 
 
-```
+```python
 from slide_prepper.preprocess.masker import Masker
 
 # HSV thresholding
@@ -64,7 +64,7 @@ masker.run()
 
 Now that masks are available, tile coordinates can be appended to the PyTorch data file. Note that if the masks are not available or the path to the mask directory is incorrect, all tiles in the image will be saved. However, there will be a warning printed for any slides that do not have a mask file available. 
 
-```
+```python
 from slide_prepper.preprocess.coord_generator import CoordGenerator
 
 coord_maker = CoordGenerator(pt_file="data_file.pth", 
@@ -80,7 +80,7 @@ print(pt_reader.pull_slide_info(slide_idx=2)['tile_coords'][0:10])
 
 Creates a data sheet defining which slides are in training, validation, and test sets in each fold. This can be updated manually and used in downstream training. 
 
-```
+```python
 from slide_prepper.preprocess.split_folds import DataSplitter
 
 splitter = DataSplitter("data_file.pth", n_folds=1)
