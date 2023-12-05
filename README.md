@@ -78,7 +78,7 @@ print(pt_reader.pull_slide_info(slide_idx=2)['tile_coords'][0:10])
 ```
 #### 4. Extract image features for each tile 
 
-Runs each tile image through a standard CNN to create a feature vector for each tile. See PyTorch documentation on available ![models](https://pytorch.org/vision/stable/models.html). 
+Runs each tile image through a standard CNN to create a feature vector for each tile. See PyTorch documentation on available [models](https://pytorch.org/vision/stable/models.html). 
 
 ```python
 from slide_prepper.feat_extract import FeatExtractor
