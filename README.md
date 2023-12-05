@@ -7,6 +7,7 @@ The process of preparing digitized slide images for machine learning operations 
 - Generating tissue mask PNG images
 - Generating tile coordinates
 - Saving tiles as PNG images *COMING SOON*
+- Extracting feature vectors for each tile using classic CNNs
 
 #### 1. Write PyTorch (.pth) file from list of slides
 
