@@ -6,8 +6,8 @@ The process of preparing digitized slide images for machine learning operations 
 - Writing, reading, and modifying PyTorch data files
 - Generating tissue mask PNG images
 - Generating tile coordinates
-- Saving tiles as PNG images *COMING SOON*
 - Extracting feature vectors for each tile using classic CNNs
+- Saving tiles as PNG images 
 
 #### 1. Write PyTorch (.pth) file from list of slides
 
@@ -104,4 +104,18 @@ splitter.run()
 splitter.write_file("data_splits.csv")
 ```
 
-Your data should now be adequately prepared for training on slide-level labels. Proceed to respective training repo. 
+#### Optional: Save tile image files (WARNING: needs debugging)
+
+This can be used on any PyTorch file that contains tile coordinates. The tile image names will only contain labels if the 'tile_labels' key is present in the PyTorch data file. 
+
+```python
+from slide_prepper.save_tile_imgs import TileImgSaver
+
+PT_FILE = "/dbfs/mnt/azrange/Piening/Angela/Multimodal/sandbox/data/luad/tcga_pretend_data.pth"
+TILE_DIR = "/dbfs/mnt/azrange/Piening/Angela/Multimodal/sandbox/data/luad/tiles"
+
+img_saver = TileSaver(pt_file=PT_FILE, 
+                      tile_dir=TILE_DIR)
+img_saver.run()
+```
+
