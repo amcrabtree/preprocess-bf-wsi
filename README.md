@@ -81,6 +81,8 @@ print(pt_reader.pull_slide_info(slide_idx=2)['tile_coords'][0:10])
 Runs each tile image through a standard CNN to create a feature vector for each tile. See PyTorch documentation on available !(models)[https://pytorch.org/vision/stable/models.html]. 
 
 ```python
+from slide_prepper.feat_extract import FeatExtractor
+
 extractor = FeatExtractor(pt_file="data_file.pth", 
                           model='resnet50',
                           weights='ResNet50_Weights.IMAGENET1K_V2')
