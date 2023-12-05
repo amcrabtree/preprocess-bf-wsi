@@ -82,8 +82,7 @@ Runs each tile image through a standard CNN to create a feature vector for each 
 ```python
 extractor = FeatExtractor(pt_file="data_file.pth", 
                           model='resnet50',
-                          weights='ResNet50_Weights.IMAGENET1K_V2',
-                          weights_file=WEIGHTS_FILE)
+                          weights='ResNet50_Weights.IMAGENET1K_V2')
 extractor.run(pt_out="data_feat_file.pth")
 
 # Alternatively, you can overwrite your old data file by excluding arguments from the run method:
