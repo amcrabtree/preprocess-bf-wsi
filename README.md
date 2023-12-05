@@ -75,8 +75,22 @@ coord_maker.run()
 # Ensure tile coordinates are available in data file (print first 10 coordinates):
 print(pt_reader.pull_slide_info(slide_idx=2)['tile_coords'][0:10])
 ```
+#### 4. Extract image features for each tile 
 
-#### 4. Divide dataset between train/val/test and make folds
+Runs each tile image through a standard CNN to create a feature vector for each tile. See PyTorch documentation on available !(models)[https://pytorch.org/vision/stable/models.html]. 
+
+```python
+extractor = FeatExtractor(pt_file="data_file.pth", 
+                          model='resnet50',
+                          weights='ResNet50_Weights.IMAGENET1K_V2',
+                          weights_file=WEIGHTS_FILE)
+extractor.run(pt_out="data_feat_file.pth")
+
+# Alternatively, you can overwrite your old data file by excluding arguments from the run method:
+extractor.run()
+```
+
+#### 5. Divide dataset between train/val/test and make folds
 
 Creates a data sheet defining which slides are in training, validation, and test sets in each fold. This can be updated manually and used in downstream training. 
 
