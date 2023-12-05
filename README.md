@@ -111,9 +111,6 @@ This can be used on any PyTorch file that contains tile coordinates. The tile im
 ```python
 from slide_prepper.save_tile_imgs import TileImgSaver
 
-PT_FILE = "/dbfs/mnt/azrange/Piening/Angela/Multimodal/sandbox/data/luad/tcga_pretend_data.pth"
-TILE_DIR = "/dbfs/mnt/azrange/Piening/Angela/Multimodal/sandbox/data/luad/tiles"
-
 img_saver = TileSaver(pt_file=PT_FILE, 
                       tile_dir=TILE_DIR)
 img_saver.run()
